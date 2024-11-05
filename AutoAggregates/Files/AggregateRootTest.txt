@@ -1,0 +1,28 @@
+using {ProjectName}.Core.Domain.Aggregates.{Pluralize}.ValueObjects;
+
+using EventBus.Messages.Aggregates.{Pluralize}.Events;
+
+using MDF.Framework.Extensions.Guards;
+using MDF.Framework.Extensions.Guards.GuardClauses;
+using MDF.Framework.SeedWork;
+using MDF.Framework.SeedWork.SharedKernel;
+using MDF.Resources.Common;
+using MDF.Resources.Common.FormattedMessages;
+
+using Moq;
+
+namespace {ProjectName}.Core.ApplicationService.Tests.Unit.Aggregates.{Pluralize};
+public class {Singular}Tests
+{
+	[Fact]
+	public async Task ShouldBe_Create{Singular}Aggregate_When_ValidInputs()
+	{
+		// Arrange
+
+		// Act
+
+		// Assert
+
+	}
+
+}

@@ -1,0 +1,12 @@
+﻿using {ProjectName}.Core.Domain.Aggregates.{Pluralize};
+
+using MDF.Framework.LayersContracts.Persistence.Commands;
+
+namespace {ProjectName}.Core.Contracts.Aggregates.{Pluralize}.CommandRepositories;
+public interface I{Singular}CommandRepository : ICommandRepository<{Singular}>
+{
+	//اینجا باید متد های مورد نیاز را نوشت
+	//هر متدی که در کلاس Base وجود ندارد باید اینجا نوشته شود
+	public Task<bool> IsActive{Singular}Async(Guid {Singular}Id, CancellationToken cancellationToken = default);
+
+}

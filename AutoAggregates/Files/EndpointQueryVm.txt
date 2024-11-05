@@ -1,0 +1,7 @@
+namespace {ProjectName}.Endpoints.API.ViewModels.{Pluralize};
+
+public record {Singular}QueryVm
+{
+	public Guid Id { get; init; }
+	public string Title { get; init; }
+}

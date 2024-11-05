@@ -1,0 +1,31 @@
+using {ProjectName}.Core.Contracts.Aggregates.{Pluralize}.CommandRepositories;
+using {ProjectName}.Core.Contracts.Aggregates.{Pluralize}.Commands;
+using {ProjectName}.Core.Domain.Aggregates.{Pluralize};
+
+using FluentResults;
+
+using MDF.Framework.LayersContracts.ApplicationServices.MediatorExtensions.CQRS;
+using MDF.Resources.Common.FormattedMessages;
+
+namespace {ProjectName}.Core.ApplicationService.Aggregates.{Pluralize}.CommandHandlers;
+public class Create{Singular}CommandHandler : ICommandHandler<Create{Singular}Command, Guid>
+{
+	private readonly I{Singular}CommandRepository _{Singular}CommandRepository;
+	public Create{Singular}CommandHandler(I{Singular}CommandRepository {Singular}CommandRepository)
+	{
+		_{Singular}CommandRepository = {Singular}CommandRepository;
+	}
+
+	public async Task<Result<Guid>> Handle(Create{Singular}Command request, CancellationToken cancellationToken)
+	{
+		var category = new {Singular}()
+			.Create{Singular}(request.Title);
+		if (category.Result.IsSuccess)
+		{
+			await _{Singular}CommandRepository.InsertByAsync(category, cancellationToken);
+			await _{Singular}CommandRepository.CommitAsync(cancellationToken);
+			return category.Id;
+		}
+		return Result.Fail(ErrorMessages.UnexpectedError);
+	}
+}

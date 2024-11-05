@@ -1,0 +1,47 @@
+using {ProjectName}.Core.Domain.Aggregates.{Pluralize};
+using {ProjectName}.Core.Domain.Aggregates.{Pluralize}.ValueObjects;
+
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+
+namespace {ProjectName}.Infrastructure.Persistence.Sql.Queries.Aggregates.{Pluralize}.Configurations;
+public class {Singular}Configuration : IEntityTypeConfiguration<{Singular}>
+{
+	public void Configure(EntityTypeBuilder<{Singular}> builder)
+	{
+		//builder.Property(c => c.{Singular}Title)
+		//	.IsRequired(true)
+		//	.HasMaxLength({Singular}Title.Maximum)
+		//	.HasConversion(t => t.Value, t => {Singular}Title.Create(t).Value);
+
+		//builder.Property(c => c.PostIds)
+		//	.HasConversion(
+		//		v => string.Join(',', v),
+		//		v => v.Split(',', StringSplitOptions.RemoveEmptyEntries).Select(Guid.Parse).ToList());
+
+		//builder.Property(c => c.Parent{Pluralize}Id)
+		//	.HasConversion(
+		//		v => string.Join(',', v),
+		//		v => v.Split(',', StringSplitOptions.RemoveEmptyEntries).Select(Guid.Parse).ToList<Guid>());
+
+
+		builder.ToTable("{Pluralize}");
+		builder.Property(e => e.Id).ValueGeneratedNever();
+		builder.Property(e => e.{Singular}Title)
+					  .IsRequired()
+					  .HasMaxLength({Singular}Title.Maximum)
+		.HasConversion(t => t.Value, t => {Singular}Title.Create(t).Value);
+		
+	//	builder.Property(e => e.PostIds)
+	//				  .HasConversion(
+	//					  v => string.Join(',', v),
+	//					  v => v.Split(',', StringSplitOptions.RemoveEmptyEntries).Select(Guid.Parse).ToList())
+	//		.Metadata.SetValueComparer(new ValueComparer<List<Guid>>(
+	//			(c1, c2) => c1.SequenceEqual(c2),
+	//			c => c.Aggregate(0, (a, v) => HashCode.Combine(a, v.GetHashCode())),
+	//			c => c.ToList()));
+
+
+	}
+}

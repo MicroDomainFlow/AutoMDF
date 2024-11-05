@@ -1,0 +1,99 @@
+﻿using {ProjectName}.Core.Domain.Aggregates.{Pluralize}.ValueObjects;
+
+using EventBus.Messages.Aggregates.{Pluralize}.Events;
+using EventBus.Messages.Aggregates.Posts.Events;
+
+using MDF.Framework.Extensions.Guards;
+using MDF.Framework.Extensions.Guards.GuardClauses;
+using MDF.Framework.SeedWork;
+using MDF.Framework.SeedWork.SharedKernel;
+using MDF.Resources.Common;
+using MDF.Resources.Common.FormattedMessages;
+
+namespace {ProjectName}.Core.Domain.Aggregates.{Pluralize};
+
+/// <summary>
+/// Represents a {Singular} in the content service.
+/// </summary>
+public class {Singular} : AggregateRoot<{Singular}>
+{
+	public {Singular}Title {Singular}Title { get; private set; }
+
+	private readonly List<Guid> _parent{Pluralize}Id;
+	public virtual IReadOnlyList<Guid> Parent{Pluralize}Id => _parent{Pluralize}Id;
+
+	private List<Guid> _postIds;
+	public virtual IReadOnlyList<Guid> PostIds => _postIds;
+
+	public {Singular}()
+	{
+		_postIds = new List<Guid>();
+		_parent{Pluralize}Id = new List<Guid>();
+	}
+
+	/// <summary>
+	/// Initializes a new instance of the <see cref="{Singular}"/> class.
+	/// </summary>
+	/// <param name="title">The title of the {Singular}.</param>
+	private {Singular}(string? title) : this()
+	{
+		// استفاده از گارد
+		var titleResult = Guard.CheckIf(title, DataDictionary.{Singular})
+			.NotNull()
+			.NotEmpty()
+			.LengthInclusiveBetween(5, 20);
+
+		Result.WithErrors(titleResult._result.Errors);
+
+		if (Result.IsSuccess)
+		{
+			{Singular}Title = {Singular}Title.Create(titleResult._result.Value).Value!;
+		}
+	}
+
+	/// <summary>
+	/// Creates a new {Singular}.
+	/// </summary>
+	/// <returns>The created {Singular}.</returns>
+	public {Singular} Create{Singular}(string? title)
+	{
+		var checkValidation = new {Singular}(title);
+		Result.WithErrors(checkValidation.Result.Errors);
+
+		if (Result.IsSuccess)
+		{
+			this.{Singular}Title = checkValidation.{Singular}Title;
+			RaiseDomainEvent(new {Singular}CreatedEvent(Id, this.{Singular}Title.Value, (List<Guid>)this.Parent{Pluralize}Id));
+		}
+		return this;
+	}
+
+	/// <summary>
+	/// Changes the title of the {Singular}.
+	/// </summary>
+	/// <param name="title">The new title of the {Singular}.</param>
+	/// <returns>The updated {Singular}.</returns>
+	public {Singular} Change{Singular}Title(string? title)
+	{
+		// استفاده از گارد
+		//var guardResult=Guard.CheckIf(title, DataDictionary.Title)
+		//    .NotNull<string>()
+		//    .NotEmpty<string>()
+		//    .MinimumLength(Title.Minimum)
+		//    .MaximumLength(Title.Maximum)
+		//    .AsResult();
+
+		// استفاده از Value Object
+		var titleResult = {Singular}Title.Create(title);
+		Result.WithErrors(titleResult.Errors);
+
+		if (Result.IsSuccess)
+		{
+			this.{Singular}Title = titleResult.Value!;
+
+			RaiseDomainEvent(new {Singular}TitleChangedEvent(Id, {Singular}Title.Value));
+			Result.WithSuccess(SuccessMessages.SuccessUpdate(DataDictionary.Post));
+		}
+		return this;
+	}
+}

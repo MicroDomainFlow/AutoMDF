@@ -1,0 +1,93 @@
+using AutoMapper;
+
+using {ProjectName}.Core.Contracts.Aggregates.{Pluralize}.Commands;
+using {ProjectName}.Core.Contracts.Aggregates.{Pluralize}.Queries;
+using {ProjectName}.Core.Contracts.Aggregates.{Pluralize}.Queries.Models;
+using {ProjectName}.Endpoints.API.ViewModels.{Pluralize};
+
+using MDF.Framework.Endpoints.Api;
+using MDF.Framework.Extensions.Results;
+
+using MediatR;
+
+using Microsoft.AspNetCore.Mvc;
+
+namespace {ProjectName}.Endpoints.API.Controllers;
+[Route("api/[controller]/[action]")]
+public class {Singular}Controller : BaseController
+{
+	private readonly ILogger<{Singular}Controller> _logger;
+	public {Singular}Controller(IMediator mediator, IMapper mapper, ILogger<{Singular}Controller> logger) : base(mediator, mapper)
+	{
+		_logger = logger;
+	}
+
+	[ProducesResponseType(type: typeof(CustomResult<List<{Singular}QueryDto>>), statusCode: StatusCodes.Status200OK)]
+	[HttpGet("")]
+	public Task<IActionResult> GetAll{Singular}Async()
+	{
+		return QueryAsync<GetAll{Singular}Query, List<{Singular}QueryDto>>(new GetAll{Singular}Query());
+	}
+
+	[ProducesResponseType(type: typeof(CustomResult<{Singular}QueryDto>), statusCode: StatusCodes.Status200OK)]
+	[ProducesResponseType(type: typeof(CustomResult), statusCode: StatusCodes.Status400BadRequest)]
+	[HttpGet("")]
+	public Task<IActionResult> Get{Singular}Async(Get{Singular}ByIdQuery {Singular}Id)
+	{
+		return QueryAsync<Get{Singular}ByIdQuery, {Singular}QueryDto>({Singular}Id);
+	}
+
+	[ProducesResponseType(type: typeof(CustomResult<List<{Singular}QueryDto>>), statusCode: StatusCodes.Status200OK)]
+	[ProducesResponseType(type: typeof(CustomResult), statusCode: StatusCodes.Status400BadRequest)]
+	[HttpGet("")]
+	public Task<IActionResult> GetSub{Pluralize}Async(GetAllSub{Singular}Query id)
+	{
+		return QueryAsync<GetAllSub{Singular}Query, List<{Singular}QueryDto>>(id);
+	}
+
+	[ProducesResponseType(type: typeof(CustomResult<Guid>), statusCode: StatusCodes.Status200OK)]
+	[ProducesResponseType(type: typeof(CustomResult), statusCode: StatusCodes.Status400BadRequest)]
+	[HttpPost("")]
+	public Task<IActionResult> Create{Singular}Async([FromBody] Create{Singular}CommandVm create{Singular}CommandVm)
+	{
+		var {Singular}Command = Mapper.Map<Create{Singular}Command>(create{Singular}CommandVm);
+		return CreateAsync<Create{Singular}Command, Guid>({Singular}Command);
+	}
+
+	[ProducesResponseType(type: typeof(CustomResult<Guid>), statusCode: StatusCodes.Status200OK)]
+	[ProducesResponseType(type: typeof(CustomResult), statusCode: StatusCodes.Status400BadRequest)]
+	[HttpPut("")]
+	public Task<IActionResult> AddParent{Singular}Async([FromBody] AddParent{Singular}CommandVm addParent{Singular}CommandVm)
+	{
+		var addParent{Singular}Command = Mapper.Map<AddParent{Singular}Command>(addParent{Singular}CommandVm);
+		return CreateAsync<AddParent{Singular}Command, Guid>(addParent{Singular}Command);
+	}
+
+	[ProducesResponseType(type: typeof(CustomResult<Guid>), statusCode: StatusCodes.Status200OK)]
+	[ProducesResponseType(type: typeof(CustomResult), statusCode: StatusCodes.Status400BadRequest)]
+	[HttpPut("")]
+	public Task<IActionResult> {Singular}TitleChangeAsync([FromBody] {Singular}TitleChangeCommand {Singular}TitleChangeCommand)
+	{
+		// mapper her if needed
+		return EditAsync<{Singular}TitleChangeCommand, Guid>({Singular}TitleChangeCommand);
+	}
+
+	[ProducesResponseType(type: typeof(CustomResult), statusCode: StatusCodes.Status200OK)]
+	[ProducesResponseType(type: typeof(CustomResult), statusCode: StatusCodes.Status400BadRequest)]
+	[HttpDelete("")]
+	public Task<IActionResult> Delete{Singular}Async([FromBody] Remove{Singular}Command remove{Singular}Command)
+	{
+		// mapper her if needed
+		return DeleteAsync<Remove{Singular}Command>(remove{Singular}Command);
+	}
+
+	[ProducesResponseType(type: typeof(CustomResult), statusCode: StatusCodes.Status200OK)]
+	[ProducesResponseType(type: typeof(CustomResult), statusCode: StatusCodes.Status400BadRequest)]
+	[HttpDelete("")]
+	public Task<IActionResult> DeleteParent{Singular}Async([FromBody] RemoveParent{Singular}Command remove{Singular}Command)
+	{
+		// mapper her if needed
+		return DeleteAsync<RemoveParent{Singular}Command>(remove{Singular}Command);
+	}
+
+}

@@ -1,0 +1,19 @@
+using {ProjectName}.Core.Domain.Aggregates.{Pluralize};
+using {ProjectName}.Core.Domain.Aggregates.{Pluralize}.ValueObjects;
+
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+
+namespace {ProjectName}.Infrastructure.Persistence.Sql.Commands.Aggregates.{Pluralize}.Configurations;
+internal sealed class {Singular}Configuration : IEntityTypeConfiguration<{Singular}>
+{
+	public void Configure(EntityTypeBuilder<{Singular}> builder)
+	{
+		builder.Property(c => c.{Singular}Title)
+			.IsRequired(true)
+			.HasMaxLength(Title.Maximum)
+			.HasConversion(t => t.Value, t => {Singular}Title.Create(t).Value);
+
+
+	}
+}

@@ -1,0 +1,28 @@
+using {ProjectName}.Resources;
+using {ProjectName}.Resources.FormattedMessages;
+
+using EventBus.Messages.Aggregates.{Pluralize}.Events;
+
+using MassTransit;
+
+using MDF.Framework.LayersContracts.ApplicationServices;
+using MDF.Resources.Common;
+using MDF.Resources.Common.FormattedMessages;
+
+using Moq;
+
+namespace {ProjectName}.Core.ApplicationService.Tests.Unit.Aggregates.{Pluralize}.EventHandlers;
+public class {Singular}CreatedEventHandlerTests
+{
+	[Fact]
+	public async Task ShouldBe_Call{Singular}IdInRespository_When_ConsumeEvent()
+	{
+		// Arrange
+
+		// Act
+
+		// Assert
+
+	}
+
+}

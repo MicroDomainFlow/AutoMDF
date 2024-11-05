@@ -1,0 +1,23 @@
+using FluentResults;
+
+using MDF.Framework.Extensions.Guards;
+using MDF.Framework.Extensions.Guards.GuardClauses;
+using MDF.Framework.SeedWork;
+using MDF.Resources.Common;
+using Moq;
+
+namespace {ProjectName}.Core.ApplicationService.Tests.Unit.Aggregates.{Pluralize}.ValueObjects;
+public class {Singular}Tests
+{
+	[Fact]
+	public async Task ShouldBe_Create{Singular}Valueobject_When_ValidInputs()
+	{
+		// Arrange
+
+		// Act
+
+		// Assert
+
+	}
+
+}

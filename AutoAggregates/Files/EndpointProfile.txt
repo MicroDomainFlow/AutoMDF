@@ -1,0 +1,18 @@
+using AutoMapper;
+
+using {ProjectName}.Core.Contracts.Aggregates.{Pluralize}.Commands;
+using {ProjectName}.Endpoints.API.ViewModels.{Pluralize};
+
+namespace {ProjectName}.Endpoints.API.ProfilesViewModel;
+
+public class {Singular}Profile : Profile
+{
+	public {Singular}Profile()
+	{
+		//Sample:
+		CreateMap<Create{Singular}Command, Create{Singular}CommandVm>().ReverseMap()
+			.ForMember(ds => ds.Title, opt => opt.MapFrom(src => src.{Singular}Title))
+			;
+
+	}
+}

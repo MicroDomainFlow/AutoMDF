@@ -1,0 +1,47 @@
+using {ProjectName}.Core.Domain.Aggregates.{Pluralize}.ValueObjects;
+
+using FluentResults;
+
+using MDF.Framework.SeedWork;
+using MDF.Resources.Common;
+using MDF.Resources.Common.FormattedMessages;
+
+namespace {ProjectName}.Core.Domain.Aggregates.{Pluralize}.Entities;
+public class {Singular}Entity : Entity
+{
+	public DisplayName Name { get; private set; } //DisplayName is value object
+	
+	private {Singular}Entity()
+	{
+
+	}
+	private {Singular}Entity(DisplayName name) : this()
+	{
+		Name = name;
+	
+	}
+
+	public static Result<{Singular}Entity> Create(string? name)
+	{
+		Result<{Singular}Entity> result = new();
+
+		if ({Singular} is null)
+		{
+			var errorMessage = ValidationMessages.Required(DataDictionary.Post);
+			result.WithError(errorMessage);
+		}
+
+		var displayNameResult = DisplayName.Create(name);
+		result.WithErrors(displayNameResult.Errors);
+
+		if (result.IsFailed)
+		{
+			return result;
+		}
+
+		var returnValue = new {Singular}Entity(displayNameResult.Value);
+		result.WithValue(returnValue);
+		return result;
+	}
+
+}

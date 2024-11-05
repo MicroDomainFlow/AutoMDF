@@ -1,0 +1,64 @@
+using MicroAppService46.Core.ApplicationService.Aggregates.{Pluralize}.QueryHandlers;
+using MicroAppService46.Core.Contracts.Aggregates.{Pluralize}.QueryRepositories;
+using MicroAppService46.Core.Contracts.Aggregates.{Pluralize}.Queries;
+using MicroAppService46.Core.Domain.Aggregates.{Pluralize};
+
+using MDF.Resources.Common.Messages;
+
+using Moq;
+
+namespace MicroAppService46.Core.ApplicationService.Tests.Unit.Aggregates.{Pluralize}.QueryHandlers;
+public class Create{Singular}QueryHandlerTests
+{
+	[Fact]
+	public async Task ShouldBe_Returns{Singular}Id_When_ValidQuery()
+	{
+		// Arrange
+		var {Singular}RepositoryMock = new Mock<I{Singular}QueryRepository>();
+		var cancellationToken = new CancellationToken();
+		var query = new Create{Singular}Query
+		{
+			Title = "Test Title".PadLeft(50, '-'),
+
+		};
+		var {Singular} = new {Singular}().Create(query.Title, query.Description, query.Text);
+		{Singular}RepositoryMock.Setup(x => x.InsertByAsync(It.IsAny<{Singular}>(), cancellationToken)).Returns(Task.CompletedTask);
+		{Singular}RepositoryMock.Setup(x => x.CommitAsync(cancellationToken));
+		var queryHandler = new Create{Singular}QueryHandler({Singular}RepositoryMock.Object);
+
+		// Act
+		var result = await queryHandler.Handle(query, cancellationToken);
+
+		// Assert
+		Assert.True(result.IsSuccess);
+		Assert.NotEqual(Guid.Empty, result.Value);
+	}
+
+	[Fact]
+	public async Task ShouldBe_ReturnsError_When_InvalidQuery()
+	{
+		// Arrange
+		var {Singular}RepositoryMock = new Mock<I{Singular}QueryRepository>();
+		var cancellationToken = new CancellationToken();
+		var query = new Create{Singular}Query
+		{
+			Title = null, // Invalid query with null title
+			Description = "Test Description",
+			Text = "Test Text"
+		};
+		var {Singular} = new {Singular}().Create(query.Title, query.Description, query.Text);
+		var error = Errors.UnexpectedError;
+		{Singular}.Result.WithError(error);
+		{Singular}RepositoryMock.Setup(x => x.InsertByAsync(It.IsAny<{Singular}>(), cancellationToken)).Returns(Task.CompletedTask);
+		{Singular}RepositoryMock.Setup(x => x.CommitAsync(cancellationToken));
+		var queryHandler = new Create{Singular}QueryHandler({Singular}RepositoryMock.Object);
+
+		// Act
+		var result = await queryHandler.Handle(query, cancellationToken);
+
+		// Assert
+		Assert.True(result.IsFailed);
+		Assert.Equal(4, result.Errors.Count);
+		Assert.Contains(error, result.Errors[3].Message);
+	}
+}

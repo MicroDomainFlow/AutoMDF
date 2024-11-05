@@ -1,0 +1,10 @@
+using {ProjectName}.Core.Contracts.Aggregates.{Pluralize}.Queries;
+using {ProjectName}.Core.Contracts.Aggregates.{Pluralize}.Queries.Models;
+
+
+namespace {ProjectName}.Core.Contracts.Aggregates.{Pluralize}.QueryRepositories;
+public interface I{Singular}QueryRepository
+{
+	public Task<List<{Singular}QueryDto>> ExecuteAsync(GetAll{Singular}Query query, CancellationToken cancellationToken = default);
+	
+}

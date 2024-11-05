@@ -1,0 +1,57 @@
+using AutoMapper;
+
+using {ProjectName}.Core.Contracts.Aggregates.{Pluralize}.Commands;
+using {ProjectName}.Core.Contracts.Aggregates.{Pluralize}.Queries.GetAll;
+using {ProjectName}.Core.Contracts.Aggregates.{Pluralize}.Queries.Models;
+using {ProjectName}.Endpoints.API.Controllers;
+using {ProjectName}.Endpoints.API.ViewModels.{Pluralize};
+
+using FluentResults;
+
+using MDF.Framework.Extensions.Results;
+
+using MediatR;
+
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+
+using Moq;
+
+namespace {ProjectName}.Endpoints.API.Tests.Unit.Controllers;
+public class {Singular}ControllerTests
+{
+	private readonly Mock<IMediator> _mediatorMock;
+	private readonly Mock<IMapper> _mapperMock;
+	private readonly {Singular}Controller _{Singular}Controller;
+
+	public {Singular}ControllerTests()
+	{
+		_mediatorMock = new Mock<IMediator>();
+		_mapperMock = new Mock<IMapper>();
+		_{Singular}Controller = new {Singular}Controller(_mediatorMock.Object, _mapperMock.Object ,null);
+	}
+
+	[Fact]
+	public async Task ShouldBe_ReturnsListOf{Pluralize}_When_GetAll{Singular}Async()
+	{
+		// Arrange
+		var expected{Pluralize} = new List<{Singular}QueryDto>
+							{
+								new {Singular}QueryDto { Id = Guid.NewGuid(), {Singular}Title = "{Singular} 1" },
+								new {Singular}QueryDto { Id = Guid.NewGuid(), {Singular}Title = "{Singular} 2" }
+							};
+
+		_mediatorMock.Setup(m => m.Send(It.IsAny<GetAll{Singular}Query>(), It.IsAny<CancellationToken>()))
+			.ReturnsAsync(expected{Pluralize});
+
+		// Act
+		var result = await _{Singular}Controller.GetAll{Singular}Async();
+
+		// Assert
+		var okResult = Assert.IsType<OkObjectResult>(result);
+		var actual{Pluralize} = Assert.IsType<CustomResult<List<{Singular}QueryDto>>>(okResult.Value);
+		Assert.Equal(StatusCodes.Status200OK, okResult.StatusCode);
+		Assert.Equal(expected{Pluralize}, actual{Pluralize}.Value);
+	}
+
+}

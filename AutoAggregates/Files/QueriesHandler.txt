@@ -1,0 +1,27 @@
+using {ProjectName}.Core.Contracts.Aggregates.{Pluralize}.Queries.Models;
+using {ProjectName}.Core.Contracts.Aggregates.{Pluralize}.QueryRepositories;
+
+using FluentResults;
+
+using MDF.Framework.LayersContracts.ApplicationServices.MediatorExtensions.CQRS;
+
+using Microsoft.Extensions.Logging;
+
+namespace {ProjectName}.Core.ApplicationService.Aggregates.{Pluralize}.QueriesHandlers;
+public class GetAll{Singular}QueryHandler : IQueryHandler<GetAll{Singular}Query, List<{Singular}QueryDto>>
+{
+	private readonly I{Singular}QueryRepository _{Singular}QueryRepository;
+	private readonly ILogger<GetAll{Singular}QueryHandler> _logger;
+
+	public GetAll{Singular}QueryHandler(ILogger<GetAll{Singular}QueryHandler> logger, I{Singular}QueryRepository {Singular}QueryRepository)
+	{
+		_logger = logger;
+		_{Singular}QueryRepository = {Singular}QueryRepository;
+	}
+
+	public async Task<Result<List<{Singular}QueryDto>>> Handle(GetAll{Singular}Query request, CancellationToken cancellationToken)
+	{
+		var {Pluralize} = await _{Singular}QueryRepository.ExecuteAsync(request, cancellationToken);
+		return Result.Ok({Pluralize});
+	}
+}

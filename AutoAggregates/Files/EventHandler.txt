@@ -1,0 +1,29 @@
+using {ProjectName}.Resources;
+using {ProjectName}.Resources.FormattedMessages;
+
+using EventBus.Messages.Aggregates.{Pluralize}.Events;
+
+using MassTransit;
+
+using MDF.Framework.LayersContracts.ApplicationServices;
+using MDF.Resources.Common;
+using MDF.Resources.Common.FormattedMessages;
+using Microsoft.Extensions.Logging;
+
+namespace {ProjectName}.Core.ApplicationService.Aggregates.{Pluralize}.EventHandlers;
+public sealed class {Singular}CreatedEventHandler : IDomainEventHandler<{Singular}CreatedEvent>
+{
+ private readonly ILogger<{Singular}CreatedEventHandler> _logger;
+
+ public {Singular}CreatedEventHandler(ILogger<{Singular}CreatedEventHandler> logger)
+ {
+	 _logger = logger;
+ }
+
+ public Task Consume(ConsumeContext<{Singular}CreatedEvent> context)
+	{
+		//Write code here
+
+		return Task.CompletedTask;
+	}
+}

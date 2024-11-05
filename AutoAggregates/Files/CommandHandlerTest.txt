@@ -1,0 +1,65 @@
+using {ProjectName}.Core.ApplicationService.Aggregates.{Pluralize}.CommandHandlers;
+using {ProjectName}.Core.Contracts.Aggregates.{Pluralize}.CommandRepositories;
+using {ProjectName}.Core.Contracts.Aggregates.{Pluralize}.Commands;
+using {ProjectName}.Core.Domain.Aggregates.{Pluralize};
+
+using MDF.Resources.Common.Messages;
+
+using Moq;
+
+namespace {ProjectName}.Core.ApplicationService.Tests.Unit.Aggregates.{Pluralize}.CommandHandlers;
+public class Create{Singular}CommandHandlerTests
+{
+	[Fact]
+	public async Task ShouldBe_Returns{Singular}Id_When_ValidCommand()
+	{
+		// Arrange
+		var {Singular}RepositoryMock = new Mock<I{Singular}CommandRepository>();
+		var cancellationToken = new CancellationToken();
+		var command = new Create{Singular}Command
+		{
+			Title = "Test Title".PadLeft(50, '-'),
+			Description = "Test Description".PadLeft(150, '-'),
+			Text = "Test Text".PadLeft(255, '-')
+		};
+		var {Singular} = new {Singular}().Create(command.Title, command.Description, command.Text);
+		{Singular}RepositoryMock.Setup(x => x.InsertByAsync(It.IsAny<{Singular}>(), cancellationToken)).Returns(Task.CompletedTask);
+		{Singular}RepositoryMock.Setup(x => x.CommitAsync(cancellationToken));
+		var commandHandler = new Create{Singular}CommandHandler({Singular}RepositoryMock.Object);
+
+		// Act
+		var result = await commandHandler.Handle(command, cancellationToken);
+
+		// Assert
+		Assert.True(result.IsSuccess);
+		Assert.NotEqual(Guid.Empty, result.Value);
+	}
+
+	[Fact]
+	public async Task ShouldBe_ReturnsError_When_InvalidCommand()
+	{
+		// Arrange
+		var {Singular}RepositoryMock = new Mock<I{Singular}CommandRepository>();
+		var cancellationToken = new CancellationToken();
+		var command = new Create{Singular}Command
+		{
+			Title = null, // Invalid command with null title
+			Description = "Test Description",
+			Text = "Test Text"
+		};
+		var {Singular} = new {Singular}().Create(command.Title, command.Description, command.Text);
+		var error = Errors.UnexpectedError;
+		{Singular}.Result.WithError(error);
+		{Singular}RepositoryMock.Setup(x => x.InsertByAsync(It.IsAny<{Singular}>(), cancellationToken)).Returns(Task.CompletedTask);
+		{Singular}RepositoryMock.Setup(x => x.CommitAsync(cancellationToken));
+		var commandHandler = new Create{Singular}CommandHandler({Singular}RepositoryMock.Object);
+
+		// Act
+		var result = await commandHandler.Handle(command, cancellationToken);
+
+		// Assert
+		Assert.True(result.IsFailed);
+		Assert.Equal(4, result.Errors.Count);
+		Assert.Contains(error, result.Errors[3].Message);
+	}
+}

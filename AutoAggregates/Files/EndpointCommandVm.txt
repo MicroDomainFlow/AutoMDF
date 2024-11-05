@@ -1,0 +1,6 @@
+namespace {ProjectName}.Endpoints.API.ViewModels.{Pluralize};
+
+public record Create{Singular}CommandVm
+{
+	public required string {Singular}Title { get; init; }
+}

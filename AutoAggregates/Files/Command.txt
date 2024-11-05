@@ -1,0 +1,7 @@
+using MDF.Framework.LayersContracts.ApplicationServices.MediatorExtensions.CQRS;
+
+namespace {ProjectName}.Core.Contracts.Aggregates.{Pluralize}.Commands;
+public record Create{Singular}Command : ICommand<Guid>
+{
+	public required string Title { get; init; }
+}

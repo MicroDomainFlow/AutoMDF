@@ -1,0 +1,15 @@
+using {ProjectName}.Core.Contracts.Aggregates.{Pluralize}.Commands;
+using {ProjectName}.Core.Domain.Aggregates.{Pluralize}.ValueObjects;
+
+using FluentValidation;
+
+namespace {ProjectName}.Core.ApplicationService.Aggregates.{Pluralize}.CommandHandlers;
+public class Create{Singular}CommandValidation : AbstractValidator<Create{Singular}Command>
+{
+	public Create{Singular}CommandValidation()
+	{
+		//Complete the code
+		RuleFor(p => p.)
+		.
+	}
+}
