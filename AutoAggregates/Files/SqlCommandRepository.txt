@@ -17,7 +17,7 @@ public class {Singular}CommandEntityFrameworkRepository : BaseCommandEntityFrame
 	//  در I{Singular}CommandRepository اضافه کرد
 	//اینجا باید متد های مورد نیاز را نوشت
 	
-	//Dont forget add {Pluralize} to Command db Context !
+	//TODO Dont forget add DbSet<{Pluralize}> to Command db Context !
 	//Sample:
 	public async Task<bool> IsActive{Singular}Async(Guid {Singular}Id, CancellationToken cancellationToken)
 	{

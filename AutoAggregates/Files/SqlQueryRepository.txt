@@ -22,7 +22,7 @@ public class {Singular}QueryEntityFrameworkRepository : BaseQueryRepository<Quer
 		_logger = logger;
 	}
 
-	//Dont forget add {Pluralize} to Query db Context !
+	//TODO Dont forget add DbSet<{Pluralize}> to Query db Context !
 	public Task<List<{Singular}QueryDto>> ExecuteAsync(GetAll{Singular}Query query, CancellationToken cancellationToken = default)
 	{
 		return DbContext.{Pluralize}

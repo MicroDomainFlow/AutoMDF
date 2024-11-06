@@ -11,9 +11,11 @@ namespace {ProjectName}.Core.ApplicationService.Aggregates.{Pluralize}.CommandHa
 public class Create{Singular}CommandHandler : ICommandHandler<Create{Singular}Command, Guid>
 {
 	private readonly I{Singular}CommandRepository _{Singular}CommandRepository;
-	public Create{Singular}CommandHandler(I{Singular}CommandRepository {Singular}CommandRepository)
+	private readonly ILogger<Create{Singular}CommandHandler> _logger;
+	public Create{Singular}CommandHandler(I{Singular}CommandRepository {Singular}CommandRepository, ILogger<Create{Singular}CommandHandler> logger)
 	{
 		_{Singular}CommandRepository = {Singular}CommandRepository;
+		_logger = logger;
 	}
 
 	public async Task<Result<Guid>> Handle(Create{Singular}Command request, CancellationToken cancellationToken)
