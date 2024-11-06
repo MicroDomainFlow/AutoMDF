@@ -7,6 +7,6 @@ public interface I{Singular}CommandRepository : ICommandRepository<{Singular}>
 {
 	//اینجا باید متد های مورد نیاز را نوشت
 	//هر متدی که در کلاس Base وجود ندارد باید اینجا نوشته شود
-	public Task<bool> IsActive{Singular}Async(Guid {Singular}Id, CancellationToken cancellationToken = default);
+	public Task<bool> IsActive{Singular}Async(Guid {SingularVar}Id, CancellationToken cancellationToken = default);
 
 }

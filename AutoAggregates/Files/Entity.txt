@@ -9,39 +9,32 @@ using MDF.Resources.Common.FormattedMessages;
 namespace {ProjectName}.Core.Domain.Aggregates.{Pluralize}.Entities;
 public class {Singular}Entity : Entity
 {
-	public DisplayName Name { get; private set; } //DisplayName is value object
+	public {Singular}Title Title { get; private set; } //{Singular}Title is value object
 	
 	private {Singular}Entity()
 	{
 
 	}
-	private {Singular}Entity(DisplayName name) : this()
+	private {Singular}Entity({Singular}Title title) : this()
 	{
-		Name = name;
-	
+		Title = title;
 	}
 
-	public static Result<{Singular}Entity> Create(string? name)
+	public static Result<{Singular}Entity> Create(string? title)
 	{
 		Result<{Singular}Entity> result = new();
 
-		if ({Singular} is null)
-		{
-			var errorMessage = ValidationMessages.Required(DataDictionary.Post);
-			result.WithError(errorMessage);
-		}
 
-		var displayNameResult = DisplayName.Create(name);
-		result.WithErrors(displayNameResult.Errors);
+		var {SingularVar}Result = {Singular}Title.Create(title);
+		result.WithErrors({SingularVar}Result.Errors);
 
 		if (result.IsFailed)
 		{
 			return result;
 		}
 
-		var returnValue = new {Singular}Entity(displayNameResult.Value);
+		var returnValue = new {Singular}Entity({SingularVar}Result.Value);
 		result.WithValue(returnValue);
 		return result;
 	}
-
 }

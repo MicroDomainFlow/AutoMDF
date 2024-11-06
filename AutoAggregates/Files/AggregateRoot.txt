@@ -1,7 +1,6 @@
 ﻿using {ProjectName}.Core.Domain.Aggregates.{Pluralize}.ValueObjects;
 
 using EventBus.Messages.Aggregates.{Pluralize}.Events;
-using EventBus.Messages.Aggregates.Posts.Events;
 
 using MDF.Framework.Extensions.Guards;
 using MDF.Framework.Extensions.Guards.GuardClauses;
@@ -22,12 +21,12 @@ public class {Singular} : AggregateRoot<{Singular}>
 	private readonly List<Guid> _parent{Pluralize}Id;
 	public virtual IReadOnlyList<Guid> Parent{Pluralize}Id => _parent{Pluralize}Id;
 
-	private List<Guid> _postIds;
-	public virtual IReadOnlyList<Guid> PostIds => _postIds;
+	private List<Guid> _{SingularVar}Ids;
+	public virtual IReadOnlyList<Guid> {Singular}Ids => _{SingularVar}Ids;
 
 	public {Singular}()
 	{
-		_postIds = new List<Guid>();
+		_{SingularVar}Ids = new List<Guid>();
 		_parent{Pluralize}Id = new List<Guid>();
 	}
 
@@ -79,8 +78,8 @@ public class {Singular} : AggregateRoot<{Singular}>
 		//var guardResult=Guard.CheckIf(title, DataDictionary.Title)
 		//    .NotNull<string>()
 		//    .NotEmpty<string>()
-		//    .MinimumLength(Title.Minimum)
-		//    .MaximumLength(Title.Maximum)
+		//    .MinimumLength({Singular}Title.Minimum)
+		//    .MaximumLength({Singular}Title.Maximum)
 		//    .AsResult();
 
 		// استفاده از Value Object

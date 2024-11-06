@@ -22,13 +22,13 @@ public class {Singular}ControllerTests
 {
 	private readonly Mock<IMediator> _mediatorMock;
 	private readonly Mock<IMapper> _mapperMock;
-	private readonly {Singular}Controller _{Singular}Controller;
+	private readonly {Singular}Controller _{SingularVar}Controller;
 
 	public {Singular}ControllerTests()
 	{
 		_mediatorMock = new Mock<IMediator>();
 		_mapperMock = new Mock<IMapper>();
-		_{Singular}Controller = new {Singular}Controller(_mediatorMock.Object, _mapperMock.Object ,null);
+		_{SingularVar}Controller = new {Singular}Controller(_mediatorMock.Object, _mapperMock.Object ,null);
 	}
 
 	[Fact]
@@ -45,7 +45,7 @@ public class {Singular}ControllerTests
 			.ReturnsAsync(expected{Pluralize});
 
 		// Act
-		var result = await _{Singular}Controller.GetAll{Singular}Async();
+		var result = await _{SingularVar}Controller.GetAll{Singular}Async();
 
 		// Assert
 		var okResult = Assert.IsType<OkObjectResult>(result);

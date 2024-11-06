@@ -11,6 +11,8 @@ internal static class CreateFilesHelpers
 
 		string singularName = aggregateName.Singularize(inputIsKnownToBePlural: false);
 		string pluralizeName = aggregateName.Pluralize(inputIsKnownToBeSingular: false);
+		string singularNameVariable = singularName.ToLower();
+		string pluralizeNameVariable = pluralizeName.ToLower();
 
 		string outputFilePath = csFileName.EndsWith(".cs") ? csFileName : $"{csFileName}.cs";
 
@@ -19,6 +21,8 @@ internal static class CreateFilesHelpers
 
 		content = content.Replace("{Singular}", singularName);
 		content = content.Replace("{Pluralize}", pluralizeName);
+		content = content.Replace("{SingularVar}", singularNameVariable);
+		content = content.Replace("{PluralizeVar}", pluralizeNameVariable);
 		if (!string.IsNullOrWhiteSpace(projectName))
 		{
 			content = content.Replace("{ProjectName}", projectName);

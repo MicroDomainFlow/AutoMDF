@@ -1,3 +1,4 @@
+using Content.Core.Contracts.Aggregates.{Pluralize}.Queries;
 using {ProjectName}.Core.Contracts.Aggregates.{Pluralize}.Queries.Models;
 using {ProjectName}.Core.Contracts.Aggregates.{Pluralize}.QueryRepositories;
 
@@ -10,18 +11,18 @@ using Microsoft.Extensions.Logging;
 namespace {ProjectName}.Core.ApplicationService.Aggregates.{Pluralize}.QueriesHandlers;
 public class GetAll{Singular}QueryHandler : IQueryHandler<GetAll{Singular}Query, List<{Singular}QueryDto>>
 {
-	private readonly I{Singular}QueryRepository _{Singular}QueryRepository;
+	private readonly I{Singular}QueryRepository _{SingularVar}QueryRepository;
 	private readonly ILogger<GetAll{Singular}QueryHandler> _logger;
 
-	public GetAll{Singular}QueryHandler(ILogger<GetAll{Singular}QueryHandler> logger, I{Singular}QueryRepository {Singular}QueryRepository)
+	public GetAll{Singular}QueryHandler(ILogger<GetAll{Singular}QueryHandler> logger, I{Singular}QueryRepository {SingularVar}QueryRepository)
 	{
 		_logger = logger;
-		_{Singular}QueryRepository = {Singular}QueryRepository;
+		_{SingularVar}QueryRepository = {SingularVar}QueryRepository;
 	}
 
 	public async Task<Result<List<{Singular}QueryDto>>> Handle(GetAll{Singular}Query request, CancellationToken cancellationToken)
 	{
-		var {Pluralize} = await _{Singular}QueryRepository.ExecuteAsync(request, cancellationToken);
+		var {Pluralize} = await _{SingularVar}QueryRepository.ExecuteAsync(request, cancellationToken);
 		return Result.Ok({Pluralize});
 	}
 }

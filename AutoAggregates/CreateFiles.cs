@@ -8,7 +8,6 @@ internal static class CreateFiles
 		// جایگزینی {Singular} و {Pluralize} با مفرد و جمع
 		string singularAggregateName = aggregateName.Singularize(inputIsKnownToBePlural: false);
 		string pluralizeAggregateName = aggregateName.Pluralize(inputIsKnownToBeSingular: false);
-		bool result = false;
 		//پیدا کردن namespace
 		switch (currentDirectory)
 		{
@@ -103,8 +102,8 @@ internal static class CreateFiles
 
 				List<CreateCsFile> domainFiles = [
 					new(singularAggregateName,TxtFileTypes.AggregateRoot,$"{singularAggregateName}.cs",domainAggregatesFolderPath,domainProjectName),
-					new(singularAggregateName,TxtFileTypes.Entity,$"{singularAggregateName}.cs",domainFoldersPath[0],domainProjectName),
-					new(singularAggregateName,TxtFileTypes.ValueObject,$"{singularAggregateName}.cs",domainFoldersPath[1],domainProjectName),
+					new(singularAggregateName,TxtFileTypes.Entity,$"{singularAggregateName}Entity.cs",domainFoldersPath[0],domainProjectName),
+					new(singularAggregateName,TxtFileTypes.ValueObject,$"{singularAggregateName}Title.cs",domainFoldersPath[1],domainProjectName),
 				];
 				CreateFilesHelpers.CreateCsFileFromText(domainFiles);
 				Console.WriteLine(cd);
@@ -115,15 +114,15 @@ internal static class CreateFiles
 				var domainTestProjectName = CreateFilesHelpers.FindProjectNameFormDirectoryPath(cd);
 				List<CreateFolder> domainTestFolders =
 				[
-					new ("Entities", domainTestAggregatesFolderPath+"Entity"),
-					new ("ValueObjects", domainTestAggregatesFolderPath+"Title"),
+					new ("Entities", domainTestAggregatesFolderPath),
+					new ("ValueObjects", domainTestAggregatesFolderPath),
 				];
 				var domainTestFoldersPath = CreateFilesHelpers.CreateFolder(domainTestFolders);
 
 				List<CreateCsFile> domainTestFiles = [
 					new(singularAggregateName,TxtFileTypes.AggregateRootTest,$"{singularAggregateName}Tests.cs",domainTestAggregatesFolderPath,domainTestProjectName),
-					new(singularAggregateName,TxtFileTypes.EntityTest,$"{singularAggregateName}Tests.cs",domainTestFoldersPath[0],domainTestProjectName),
-					new(singularAggregateName,TxtFileTypes.ValueObjectTest,$"{singularAggregateName}Tests.cs",domainTestFoldersPath[1],domainTestProjectName),
+					new(singularAggregateName,TxtFileTypes.EntityTest,$"{singularAggregateName}EntityTests.cs",domainTestFoldersPath[0],domainTestProjectName),
+					new(singularAggregateName,TxtFileTypes.ValueObjectTest,$"{singularAggregateName}TitleTests.cs",domainTestFoldersPath[1],domainTestProjectName),
 				];
 				CreateFilesHelpers.CreateCsFileFromText(domainTestFiles);
 				Console.WriteLine(cd);

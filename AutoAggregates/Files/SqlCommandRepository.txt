@@ -5,6 +5,7 @@ using {ProjectName}.Infrastructure.Persistence.Sql.Commands.Common;
 using MDF.Framework.Infrastructure.Commands;
 
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 
 namespace {ProjectName}.Infrastructure.Persistence.Sql.Commands.Aggregates.{Pluralize};
 public class {Singular}CommandEntityFrameworkRepository : BaseCommandEntityFrameworkRepository<{Singular}, CommandDbContext>, I{Singular}CommandRepository
@@ -17,14 +18,14 @@ public class {Singular}CommandEntityFrameworkRepository : BaseCommandEntityFrame
 	//  در I{Singular}CommandRepository اضافه کرد
 	//اینجا باید متد های مورد نیاز را نوشت
 	
-	//TODO Dont forget add DbSet<{Pluralize}> to Command db Context !
+	//TODO Don't forget add DbSet<{Pluralize}> to Command db Context !
 	//Sample:
-	public async Task<bool> IsActive{Singular}Async(Guid {Singular}Id, CancellationToken cancellationToken)
+	public async Task<bool> IsActive{Singular}Async(Guid {SingularVar}Id, CancellationToken cancellationToken)
 	{
 		
 		var all{Pluralize} = await DbContext.{Pluralize}.ToListAsync(cancellationToken);
 		var filtered{Pluralize} = all{Pluralize}
-			.Any(c => c.Parent{Pluralize}Id.Any(pid => pid == {Singular}Id));
+			.Any(c => c.Parent{Pluralize}Id.Any(pid => pid == {SingularVar}Id));
 		return filtered{Pluralize};
 	}
 }

@@ -15,7 +15,7 @@ namespace {ProjectName}.Core.ApplicationService.Tests.Unit.Aggregates.{Pluralize
 public class {Singular}CreatedEventHandlerTests
 {
 	[Fact]
-	public async Task ShouldBe_Call{Singular}IdInRespository_When_ConsumeEvent()
+	public async Task ShouldBe_Call{Singular}IdInCommandRespository_When_ConsumeEvent()
 	{
 		// Arrange
 

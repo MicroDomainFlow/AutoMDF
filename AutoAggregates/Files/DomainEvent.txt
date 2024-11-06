@@ -2,4 +2,4 @@ using MDF.Framework.SeedWork;
 
 namespace EventBus.Messages.Aggregates.{Pluralize}.Events;
 
-public record {Singular}CreatedEvent(Guid Id, string Title/*,  add other properties here*/) : IDomainEvent;
+public record {Singular}CreatedEvent(Guid Id, string Title, List<Guid> Parent{Pluralize}Id /*,  add other properties here*/) : IDomainEvent;

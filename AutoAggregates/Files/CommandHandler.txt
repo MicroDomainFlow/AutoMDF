@@ -6,15 +6,16 @@ using FluentResults;
 
 using MDF.Framework.LayersContracts.ApplicationServices.MediatorExtensions.CQRS;
 using MDF.Resources.Common.FormattedMessages;
+using Microsoft.Extensions.Logging;
 
 namespace {ProjectName}.Core.ApplicationService.Aggregates.{Pluralize}.CommandHandlers;
 public class Create{Singular}CommandHandler : ICommandHandler<Create{Singular}Command, Guid>
 {
-	private readonly I{Singular}CommandRepository _{Singular}CommandRepository;
+	private readonly I{Singular}CommandRepository _{SingularVar}CommandRepository;
 	private readonly ILogger<Create{Singular}CommandHandler> _logger;
-	public Create{Singular}CommandHandler(I{Singular}CommandRepository {Singular}CommandRepository, ILogger<Create{Singular}CommandHandler> logger)
+	public Create{Singular}CommandHandler(I{Singular}CommandRepository {SingularVar}CommandRepository, ILogger<Create{Singular}CommandHandler> logger)
 	{
-		_{Singular}CommandRepository = {Singular}CommandRepository;
+		_{SingularVar}CommandRepository = {SingularVar}CommandRepository;
 		_logger = logger;
 	}
 
@@ -24,8 +25,8 @@ public class Create{Singular}CommandHandler : ICommandHandler<Create{Singular}Co
 			.Create{Singular}(request.Title);
 		if (category.Result.IsSuccess)
 		{
-			await _{Singular}CommandRepository.InsertByAsync(category, cancellationToken);
-			await _{Singular}CommandRepository.CommitAsync(cancellationToken);
+			await _{SingularVar}CommandRepository.InsertByAsync(category, cancellationToken);
+			await _{SingularVar}CommandRepository.CommitAsync(cancellationToken);
 			return category.Id;
 		}
 		return Result.Fail(ErrorMessages.UnexpectedError);
