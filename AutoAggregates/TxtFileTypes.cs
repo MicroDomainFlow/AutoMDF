@@ -20,10 +20,12 @@ public enum TxtFileTypes
 	Command,
 	[EnumMember(Value = "Query.txt")]
 	Query,
-	[EnumMember(Value = "QueryModel.txt")]
-	QueryModel,
+	[EnumMember(Value = "QueryResult.txt")]
+	QueryResult,
 	[EnumMember(Value = "IQueryRepository.txt")]
 	IQueryRepository,
+	[EnumMember(Value = "ManualMapping.txt")]
+	ManualMapping,
 	[EnumMember(Value = "AggregateRoot.txt")]
 	AggregateRoot,
 	[EnumMember(Value = "Entity.txt")]
@@ -36,16 +38,12 @@ public enum TxtFileTypes
 	SqlCommandRepository,
 	[EnumMember(Value = "SqlQueryConfiguration.txt")]
 	SqlQueryConfiguration,
+	[EnumMember(Value = "SqlQueryModels.txt")]
+	SqlQueryModels,
 	[EnumMember(Value = "SqlQueryRepository.txt")]
 	SqlQueryRepository,
 	[EnumMember(Value = "ApiController.txt")]
 	ApiController,
-	[EnumMember(Value = "EndpointProfile.txt")]
-	EndpointProfile,
-	[EnumMember(Value = "EndpointCommandVm.txt")]
-	EndpointCommandVm,
-	[EnumMember(Value = "EndpointQueryVm.txt")]
-	EndpointQueryVm,
 	[EnumMember(Value = "CommandHandlerTest.txt")]
 	CommandHandlerTest,
 	[EnumMember(Value = "EventHandlerTest.txt")]

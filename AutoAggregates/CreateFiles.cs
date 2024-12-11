@@ -77,12 +77,12 @@ internal static class CreateFiles
 					new CreateFolder("QueryRepositories", contractsAggregatesFolderPath),
 				];
 				var contractsFoldersPath = CreateFilesHelpers.CreateFolder(contractFolders);
-				var queryModelsFolder = CreateFilesHelpers.CreateFolder("Models", contractsFoldersPath[2]);
+				var queryResultViewModelFolder = CreateFilesHelpers.CreateFolder("ResultViewModel", contractsFoldersPath[2]);
 				List<CreateCsFile> contractFiles = [
 					new(singularAggregateName,TxtFileTypes.ICommandRepository,$"I{singularAggregateName}CommandRepository",contractsFoldersPath[0],contractsProjectName),
 					new(singularAggregateName,TxtFileTypes.Command,$"Create{singularAggregateName}Command.cs",contractsFoldersPath[1],contractsProjectName),
 					new(singularAggregateName,TxtFileTypes.Query,$"GetAll{singularAggregateName}Query.cs",contractsFoldersPath[2],contractsProjectName),
-					new(singularAggregateName,TxtFileTypes.QueryModel,$"{singularAggregateName}QueryDto.cs",queryModelsFolder,contractsProjectName),
+					new(singularAggregateName,TxtFileTypes.QueryResult,$"{singularAggregateName}QueryResult.cs",queryResultViewModelFolder,contractsProjectName),
 					new(singularAggregateName,TxtFileTypes.IQueryRepository,$"I{singularAggregateName}QueryRepository.cs",contractsFoldersPath[3],contractsProjectName),
 					];
 				CreateFilesHelpers.CreateCsFileFromText(contractFiles);
@@ -146,13 +146,20 @@ internal static class CreateFiles
 
 				var sqlQueryProjectName = CreateFilesHelpers.FindProjectNameFormDirectoryPath(cd);
 
-				var sqlQueryFolderPath = CreateFilesHelpers.CreateFolder("Configurations", sqlQueryAggregatesFolderPath);
+				var sqlQueryFolderPath = CreateFilesHelpers.CreateFolder(sqlQueryAggregatesFolderPath, "Configurations", "QueryModels");
 
 				List<CreateCsFile> sqlQueryFiles = [
-					new (singularAggregateName, TxtFileTypes.SqlQueryConfiguration, $"{singularAggregateName}Configuration.cs", sqlQueryFolderPath, sqlQueryProjectName),
+					new (singularAggregateName, TxtFileTypes.SqlQueryConfiguration, $"{singularAggregateName}Configuration.cs", sqlQueryFolderPath[0], sqlQueryProjectName),
+					new (singularAggregateName, TxtFileTypes.SqlQueryModels, $"{singularAggregateName}CategoryQuery.cs", sqlQueryFolderPath[1], sqlQueryProjectName),
 					new(singularAggregateName,TxtFileTypes.SqlQueryRepository, $"{singularAggregateName}QueryEntityFrameworkRepository.cs", sqlQueryAggregatesFolderPath, sqlQueryProjectName)
 				];
 				CreateFilesHelpers.CreateCsFileFromText(sqlQueryFiles);
+				Console.WriteLine(cd);
+				break;
+			case var cd when cd.Contains("Infrastructure") && cd.Contains("Queries") && cd.EndsWith("Mapping"):
+				string sqlQueryMappingAggregatesFolderPath = CreateFilesHelpers.CreateFolder(pluralizeAggregateName, cd);
+				var sqlQueryMappingProjectName = CreateFilesHelpers.FindProjectNameFormDirectoryPath(cd);
+				CreateFilesHelpers.CreateCsFileFromText(singularAggregateName, TxtFileTypes.ManualMapping, $"{singularAggregateName}QueryMapping.cs", sqlQueryMappingAggregatesFolderPath, sqlQueryMappingProjectName);
 				Console.WriteLine(cd);
 				break;
 			case var cd when cd.Contains("Endpoints") && cd.Contains("API") && !cd.EndsWith("Tests.Unit"):
@@ -160,19 +167,6 @@ internal static class CreateFiles
 				if (cd.EndsWith("Controllers"))
 				{
 					CreateFilesHelpers.CreateCsFileFromText(singularAggregateName, TxtFileTypes.ApiController, $"{pluralizeAggregateName}Controller.cs", cd, endpointProjectName);
-				}
-				else if (cd.EndsWith("ProfilesViewModel"))
-				{
-					CreateFilesHelpers.CreateCsFileFromText(singularAggregateName, TxtFileTypes.EndpointProfile, $"{singularAggregateName}Profile.cs", cd, endpointProjectName);
-				}
-				else if (cd.EndsWith("ViewModels"))
-				{
-					var viewModelFolder = CreateFilesHelpers.CreateFolder(pluralizeAggregateName, cd);
-					List<CreateCsFile> endpointVmFiles = [
-						new(singularAggregateName, TxtFileTypes.EndpointCommandVm, $"{singularAggregateName}CommandVm.cs", Path.Combine(viewModelFolder), endpointProjectName),
-						new(singularAggregateName, TxtFileTypes.EndpointQueryVm, $"{singularAggregateName}QueryVm.cs", Path.Combine(viewModelFolder), endpointProjectName),
-						];
-					CreateFilesHelpers.CreateCsFileFromText(endpointVmFiles);
 				}
 				Console.WriteLine(cd);
 				break;

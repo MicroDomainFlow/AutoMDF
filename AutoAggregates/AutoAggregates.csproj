@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>net8.0</TargetFramework>
+    <TargetFramework>net9.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
@@ -17,22 +17,20 @@
     <None Remove="Files\CommandHandlerTest.txt" />
     <None Remove="Files\CommandValidation.txt" />
     <None Remove="Files\DomainEvent.txt" />
-    <None Remove="Files\EndpointCommandVm.txt" />
-    <None Remove="Files\EndpointProfile.txt" />
-    <None Remove="Files\EndpointQueryVm.txt" />
     <None Remove="Files\Entity.txt" />
     <None Remove="Files\EntityTest.txt" />
     <None Remove="Files\EventHandler.txt" />
     <None Remove="Files\EventHandlerTest.txt" />
     <None Remove="Files\ICommandRepository.txt" />
     <None Remove="Files\IQueryRepository.txt" />
+    <None Remove="Files\ManualMapping.txt" />
     <None Remove="Files\QueriesHandler.txt" />
     <None Remove="Files\QueriesHandlerTest.txt" />
     <None Remove="Files\Query.txt" />
-    <None Remove="Files\QueryModel.txt" />
     <None Remove="Files\SqlCommandConfiguration.txt" />
     <None Remove="Files\SqlCommandRepository.txt" />
     <None Remove="Files\SqlQueryConfiguration.txt" />
+    <None Remove="Files\SqlQueryModels.txt" />
     <None Remove="Files\SqlQueryRepository.txt" />
     <None Remove="Files\ValueObject.txt" />
     <None Remove="Files\ValueObjectTest.txt" />
@@ -66,15 +64,6 @@
     <EmbeddedResource Include="Files\DomainEvent.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Files\EndpointCommandVm.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Files\EndpointProfile.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Files\EndpointQueryVm.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
     <EmbeddedResource Include="Files\Entity.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
@@ -93,6 +82,9 @@
     <EmbeddedResource Include="Files\IQueryRepository.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
+    <EmbeddedResource Include="Files\ManualMapping.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
     <EmbeddedResource Include="Files\QueriesHandler.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
@@ -102,7 +94,7 @@
     <EmbeddedResource Include="Files\Query.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Files\QueryModel.txt">
+    <EmbeddedResource Include="Files\QueryResult.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Files\SqlCommandConfiguration.txt">
@@ -112,6 +104,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Files\SqlQueryConfiguration.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Files\SqlQueryModels.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Files\SqlQueryRepository.txt">

@@ -57,6 +57,17 @@ internal static class CreateFilesHelpers
 		return directoryInfo.FullName;
 	}
 
+	public static List<string> CreateFolder(string foldersPath, params string[] foldersName)
+	{
+		List<string> result = new List<string>();
+		foreach (var folderName in foldersName)
+		{
+			var path = CreateFolder(folderName, foldersPath);
+			result.Add(path);
+		}
+		return result;
+	}
+
 	public static List<string> CreateFolder(List<CreateFolder> folders)
 	{
 		List<string> result = new List<string>();

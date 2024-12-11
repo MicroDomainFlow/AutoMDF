@@ -5,7 +5,6 @@ using System.Text;
 namespace AutoAggregates;
 internal static class InputTypeUtility
 {
-
 	public static string EnglishOnly()
 	{
 		Console.OutputEncoding = Encoding.UTF8;
